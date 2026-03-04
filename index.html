@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flange Flatness Correction Tool - Professional</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f39c12;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --warning-color: #f1c40f;
+            --info-color: #3498db;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --text-light: #7f8c8d;
+            --border-radius: 10px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+            animation: slideDown 0.5s ease;
+        }
+
+        .header h1 {
+            color: var(--dark-color);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .language-selector {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .lang-btn.active {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            animation: fadeIn 0.8s ease;
+        }
+
+        .section-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .section-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-btn.active {
+            background: linear-gradient(135deg, var(--success-color), #27ae60);
+            transform: scale(1.05);
+        }
+
+        .points-selector {
+            background: rgba(52, 152, 219, 0.1);
+            border: 2px solid var(--info-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 30px;
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        .points-selector.show {
+            display: block;
+        }
+
+        .validation-info {
+            background: rgba(52, 152, 219, 0.1);
+            border: 2px solid var(--info-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .validation-info h5 {
+            color: var(--info-color);
+            margin-bottom: 15px;
+        }
+
+        .validation-info ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .validation-info li {
+            margin-bottom: 8px;
+            color: var(--dark-color);
+        }
+
+        .error-message {
+            background: rgba(231, 76, 60, 0.1);
+            border: 2px solid var(--danger-color);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-bottom: 20px;
+            display: none;
+            animation: shake 0.5s ease;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .error-message i {
+            color: var(--danger-color);
+            margin-right: 10px;
+        }
+
+        .point-error-list {
+            background: rgba(231, 76, 60, 0.1);
+            border: 2px solid var(--danger-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .point-error-list h5 {
+            color: var(--danger-color);
+            margin-bottom: 15px;
+        }
+
+        .point-error-item {
+            background: white;
+            border: 1px solid var(--danger-color);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+
+        .point-error-info {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .point-error-solution {
+            color: var(--danger-color);
+            font-weight: bold;
+        }
+
+        .zero-points-section {
+            background: rgba(39, 174, 96, 0.1);
+            border: 2px solid var(--success-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .zero-points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .zero-point-item {
+            background: white;
+            border: 2px solid var(--success-color);
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .zero-point-item:hover {
+            background: rgba(39, 174, 96, 0.1);
+            transform: scale(1.05);
+        }
+
+        .zero-point-item.active {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .flange-tabs {
+            margin-bottom: 30px;
+        }
+
+        .flange-tab {
+            background: rgba(255, 255, 255, 0.5);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border-radius: 25px;
+            margin: 0 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .flange-tab:hover {
+            background: rgba(74, 144, 226, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .flange-tab.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .progress-bar-container {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            padding: 5px;
+            margin-bottom: 30px;
+        }
+
+        .progress {
+            height: 25px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--success-color), var(--info-color));
+            color: white;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: width 0.5s ease;
+        }
+
+        .measurement-container {
+            margin-bottom: 30px;
+        }
+
+        .measurement-table {
+            width: 100%;
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .measurement-table th {
+            background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .measurement-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid var(--light-color);
+        }
+
+        .measurement-table tr:hover {
+            background: rgba(74, 144, 226, 0.05);
+        }
+
+        .measurement-input {
+            width: 100px;
+            padding: 8px;
+            border: 2px solid var(--light-color);
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .measurement-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+
+        .measurement-input.filled {
+            background: rgba(39, 174, 96, 0.1);
+            border-color: var(--success-color);
+        }
+
+        .measurement-input.zero-point {
+            background: rgba(39, 174, 96, 0.2);
+            border-color: var(--success-color);
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .measurement-input.error {
+            background: rgba(231, 76, 60, 0.1);
+            border-color: var(--danger-color);
+            color: var(--danger-color);
+        }
+
+        .sum-value {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-ok {
+            background: rgba(39, 174, 96, 0.2);
+            color: var(--success-color);
+        }
+
+        .status-warning {
+            background: rgba(241, 196, 15, 0.2);
+            color: var(--warning-color);
+        }
+
+        .status-critical {
+            background: rgba(243, 156, 18, 0.2);
+            color: var(--secondary-color);
+        }
+
+        .status-error {
+            background: rgba(231, 76, 60, 0.2);
+            color: var(--danger-color);
+        }
+
+        .calculate-section {
+            text-align: center;
+            margin: 30px 0;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .calculate-section.show {
+            display: block;
+        }
+
+        .calculate-btn {
+            background: linear-gradient(135deg, var(--success-color), #27ae60);
+            color: white;
+            border: none;
+            padding: 15px 50px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+        }
+
+        .results-section {
+            display: none;
+            animation: slideUp 0.5s ease;
+        }
+
+        .results-section.show {
+            display: block;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .correction-table {
+            width: 100%;
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            margin-top: 20px;
+        }
+
+        .correction-table th {
+            background: linear-gradient(135deg, var(--secondary-color), #e67e22);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .correction-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid var(--light-color);
+        }
+
+        .correction-value {
+            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .correction-value.heat {
+            background: rgba(231, 76, 60, 0.2);
+            color: var(--danger-color);
+        }
+
+        .correction-value.cool {
+            background: rgba(52, 152, 219, 0.2);
+            color: var(--info-color);
+        }
+
+        .priority-badge {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .priority-high {
+            background: rgba(231, 76, 60, 0.2);
+            color: var(--danger-color);
+        }
+
+        .priority-medium {
+            background: rgba(243, 156, 18, 0.2);
+            color: var(--secondary-color);
+        }
+
+        .priority-low {
+            background: rgba(39, 174, 96, 0.2);
+            color: var(--success-color);
+        }
+
+        .action-steps {
+            background: rgba(52, 152, 219, 0.1);
+            border: 2px solid var(--info-color);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .step-item:hover {
+            transform: translateX(10px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .step-number {
+            background: var(--info-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .loading-overlay.show {
+            display: flex;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top: 5px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .language-selector {
+                position: static;
+                text-align: center;
+                margin-top: 15px;
+            }
+            
+            .section-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .measurement-input {
+                width: 80px;
+            }
+            
+            .flange-tab {
+                margin: 5px;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header position-relative">
+            <div class="language-selector">
+                <button class="lang-btn active" onclick="changeLanguage('en')">EN</button>
+                <button class="lang-btn" onclick="changeLanguage('hi')">हिं</button>
+            </div>
+            <h1 data-en="Flange Flatness Correction Tool - Professional" data-hi="फ्लैंज फ्लैटनेस करेक्शन टूल - प्रोफेशनल">
+                Flange Flatness Correction Tool - Professional
+            </h1>
+            <p data-en="Precision Engineering Solution for Flange Alignment" data-hi="फ्लैंज एलाइनमेंट के लिए प्रिसिजन इंजीनियरिंग समाधान">
+                Precision Engineering Solution for Flange Alignment
+            </p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Section Buttons -->
+            <div class="section-buttons">
+                <button class="section-btn" onclick="selectSection(1)">
+                    <i class="fas fa-circle"></i> Section 1
+                </button>
+                <button class="section-btn" onclick="selectSection(2)">
+                    <i class="fas fa-circle"></i> Section 2
+                </button>
+                <button class="section-btn" onclick="selectSection(3)">
+                    <i class="fas fa-circle"></i> Section 3
+                </button>
+                <button class="section-btn" onclick="selectSection(4)">
+                    <i class="fas fa-circle"></i> Section 4
+                </button>
+                <button class="section-btn" onclick="selectSection(5)">
+                    <i class="fas fa-circle"></i> Section 5
+                </button>
+            </div>
+
+            <!-- Points Selector -->
+            <div class="points-selector" id="pointsSelector">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h5 data-en="Select Number of Points" data-hi="पॉइंट्स की संख्या चुनें">
+                            Select Number of Points
+                        </h5>
+                        <select class="form-select" id="pointsCount" onchange="updatePointsCount()">
+                            <option value="4">4 Points</option>
+                            <option value="8" selected>8 Points</option>
+                            <option value="12">12 Points</option>
+                            <option value="16">16 Points</option>
+                            <option value="20">20 Points</option>
+                            <option value="24">24 Points</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <button class="btn btn-primary btn-lg" onclick="applyPointsCount()">
+                            <i class="fas fa-check"></i> 
+                            <span data-en="Apply" data-hi="लागू करें">Apply</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Content -->
+            <div id="mainContent">
+                <div class="text-center py-5">
+                    <i class="fas fa-hand-pointer fa-3x text-muted mb-3"></i>
+                    <h4 data-en="Select a section to begin" data-hi="शुरू करने के लिए एक सेक्शन चुनें">
+                        Select a section to begin
+                    </h4>
+                    <p class="text-muted" data-en="Choose any section from the buttons above" data-hi="ऊपर दिए गए बटन से कोई भी सेक्शन चुनें">
+                        Choose any section from the buttons above
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Global Variables
+        let currentSection = null;
+        let currentFlange = 'bottom';
+        let currentLanguage = 'en';
+        let pointsPerSection = 8;
+        let zeroPoints = new Set();
+        let measurementData = {};
+        let sectionsData = {};
+        let allInputs = [];
+        let hasErrorValues = false;
+        let sumErrorPoints = new Set();
+        
+        // Constants
+        const TOLERANCE_LIMIT = 0.70;
+        const MAX_LIMIT = 2.0;
+        const POINT_DIFF_LIMIT = 2.0;
+        const SUM_LIMIT = 2.0;
+
+        // Translations
+        const translations = {
+            hi: {
+                header: "फ्लैंज फ्लैटनेस करेक्शन टूल - प्रोफेशनल",
+                selectSection: "सेक्शन चुनें",
+                selectPoints: "पॉइंट्स की संख्या चुनें",
+                apply: "लागू करें",
+                selectSectionText: "कृपया एक सेक्शन चुनें",
+                instruction: "ऊपर दिए गए बटन से कोई भी सेक्शन चुनें",
+                zeroPoints: "जीरो पॉइंट्स चुनें",
+                point: "पॉइंट",
+                bottomFlange: "निचला फ्लैंज",
+                topFlange: "ऊपरी फ्लैंज",
+                measurement: "माप",
+                calculate: "गणना करें",
+                results: "गणना परिणाम",
+                currentFlatness: "वर्तमान फ्लैटनेस",
+                targetFlatness: "लक्ष्य फ्लैटनेस",
+                maxDeviation: "अधिकतम विचलन",
+                correctionPoints: "सुधार पॉइंट्स",
+                correctionPlan: "सुधार योजना",
+                radius: "रेडियस",
+                currentValue: "वर्तमान मान",
+                correction: "सुधार",
+                operation: "ऑपरेशन",
+                priority: "प्राथमिकता",
+                actionSteps: "कार्य चरण - फ्लैंज ठीक करने के लिए",
+                step1: "उच्च प्राथमिकता वाले पॉइंट्स पर पहले काम करें",
+                step2: "HEATING क्षेत्रों को धीरे-धीरे गर्म करें (200-300°C)",
+                step3: "COOLING क्षेत्रों को धीरे-धीरे ठंडा करें",
+                step4: "प्रत्येक सुधार के बाद माप दोहराएं",
+                step5: "फ्लैटनेस < 0.70mm होने तक जारी रखें",
+                excellent: "उत्कृष्ट!",
+                allGood: "सभी माप सहिष्णुता के भीतर हैं। कोई सुधार की आवश्यकता नहीं।",
+                fillAll: "कृपया सभी माप पूर्ण करें!",
+                pointsApplied: "पॉइंट्स सफलतापूर्वक लागू हुए!",
+                calculationComplete: "गणना पूर्ण!",
+                errorValues: "त्रुटि: कुछ मान 2.0mm से अधिक हैं! कृपया उन्हें सुधारें।",
+                sumErrorValues: "त्रुटि: कुछ पॉइंट्स पर Inner + Outer का योग 2.0mm से अधिक है!",
+                validationRules: "वैलिडेशन नियम:",
+                rule1: "अधिकतम मान 2.0mm से कम होना चाहिए",
+                rule2: "सहिष्णुता सीमा: 0.70mm",
+                rule3: "दो पॉइंट्स का डिफरेंस 2.0mm से कम होना चाहिए",
+                rule4: "Inner + Outer का योग 2.0mm से कम होना चाहिए",
+                autoCorrection: "ऑटो करेक्शन लागू हो रहा है...",
+                heatingSolution: "HEATING समाधान"
+            },
+            en: {
+                header: "Flange Flatness Correction Tool - Professional",
+                selectSection: "Select Section",
+                selectPoints: "Select Number of Points",
+                apply: "Apply",
+                selectSectionText: "Please select a section",
+                instruction: "Select any section from the buttons above",
+                zeroPoints: "Select Zero Points",
+                point: "Point",
+                bottomFlange: "BOTTOM Flange",
+                topFlange: "TOP Flange",
+                measurement: "Measurement",
+                calculate: "Calculate",
+                results: "Calculation Results",
+                currentFlatness: "Current Flatness",
+                targetFlatness: "Target Flatness",
+                maxDeviation: "Max Deviation",
+                correctionPoints: "Correction Points",
+                correctionPlan: "Correction Plan",
+                radius: "Radius",
+                currentValue: "Current Value",
+                correction: "Correction",
+                operation: "Operation",
+                priority: "Priority",
+                actionSteps: "Action Steps - To Fix Flange",
+                step1: "Work on high priority points first",
+                step2: "Heat HEAT areas gradually (200-300°C)",
+                step3: "Cool COOL areas gradually",
+                step4: "Repeat measurement after each correction",
+                step5: "Continue until flatness < 0.70mm",
+                excellent: "Excellent!",
+                allGood: "All measurements are within tolerance. No correction needed.",
+                fillAll: "Please complete all measurements!",
+                pointsApplied: "Points applied successfully!",
+                calculationComplete: "Calculation Complete!",
+                errorValues: "Error: Some values exceed 2.0mm! Please correct them.",
+                sumErrorValues: "Error: Inner + Outer sum exceeds 2.0mm at some points!",
+                validationRules: "Validation Rules:",
+                rule1: "Maximum value must be less than 2.0mm",
+                rule2: "Tolerance limit: 0.70mm",
+                rule3: "Difference between two points must be less than 2.0mm",
+                rule4: "Inner + Outer sum must be less than 2.0mm",
+                autoCorrection: "Applying auto-correction...",
+                heatingSolution: "HEATING Solution"
+            }
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSectionsData();
+        });
+
+        function initializeSectionsData() {
+            for(let section = 1; section <= 5; section++) {
+                sectionsData[section] = {
+                    bottom: {
+                        inner: {},
+                        outer: {}
+                    },
+                    top: {
+                        inner: {},
+                        outer: {}
+                    }
+                };
+                measurementData[section] = {
+                    bottom: {},
+                    top: {}
+                };
+            }
+        }
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update button states
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update all text elements
+            updateAllText();
+        }
+
+        function updateAllText() {
+            const trans = translations[currentLanguage];
+            
+            // Update all elements with data-hi and data-en attributes
+            document.querySelectorAll('[data-hi]').forEach(element => {
+                if(currentLanguage === 'hi') {
+                    element.textContent = element.getAttribute('data-hi');
+                } else {
+                    element.textContent = element.getAttribute('data-en');
+                }
+            });
+            
+            // Update section buttons
+            if(currentSection) {
+                generateSectionContent(currentSection);
+            }
+        }
+
+        function selectSection(section) {
+            currentSection = section;
+            currentFlange = 'bottom';
+            sumErrorPoints.clear(); // Clear sum errors for new section
+            
+            // Update button states
+            document.querySelectorAll('.section-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Show points selector
+            document.getElementById('pointsSelector').classList.add('show');
+            
+            // Generate content for selected section
+            generateSectionContent(section);
+        }
+
+        function generateSectionContent(section) {
+            const mainContent = document.getElementById('mainContent');
+            const trans = translations[currentLanguage];
+            
+            mainContent.innerHTML = `
+                <!-- Validation Info -->
+                <div class="validation-info">
+                    <h5><i class="fas fa-info-circle"></i> ${trans.validationRules}</h5>
+                    <ul>
+                        <li>${trans.rule1}</li>
+                        <li>${trans.rule2}</li>
+                        <li>${trans.rule3}</li>
+                        <li><strong>${trans.rule4}</strong></li>
+                    </ul>
+                </div>
+
+                <!-- Error Message -->
+                <div class="error-message" id="errorMessage">
+                    <i class="fas fa-exclamation-triangle"></i> ${trans.errorValues}
+                </div>
+
+                <!-- Sum Error Message -->
+                <div class="error-message" id="sumErrorMessage">
+                    <i class="fas fa-exclamation-triangle"></i> ${trans.sumErrorValues}
+                </div>
+
+                <!-- Point Error List -->
+                <div class="point-error-list" id="pointErrorList" style="display: none;">
+                    <h5><i class="fas fa-list"></i> Problematic Points:</h5>
+                    <div id="pointErrorItems"></div>
+                </div>
+
+                <!-- Zero Points Selector -->
+                <div class="zero-points-section">
+                    <h4 class="text-center mb-3">
+                        <i class="fas fa-crosshairs"></i> ${trans.zeroPoints}
+                    </h4>
+                    <div class="zero-points-grid" id="zeroPointsContainer">
+                        ${generateZeroPointsHTML()}
+                    </div>
+                </div>
+
+                <!-- Flange Tabs -->
+                <div class="flange-tabs">
+                    <div class="text-center">
+                        <button class="flange-tab active" onclick="switchFlange('bottom')">
+                            <i class="fas fa-arrow-down"></i> ${trans.bottomFlange}
+                        </button>
+                        <button class="flange-tab" onclick="switchFlange('top')">
+                            <i class="fas fa-arrow-up"></i> ${trans.topFlange}
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-bar-container">
+                    <div class="progress">
+                        <div class="progress-bar" id="progressBar" style="width: 0%">
+                            0%
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Measurement Table -->
+                <div class="measurement-container">
+                    <h4 class="text-center mb-3">
+                        <i class="fas fa-ruler"></i> Section ${section} - 
+                        <span id="currentFlangeTitle">${trans.bottomFlange}</span> ${trans.measurement}
+                    </h4>
+                    <div class="table-responsive">
+                        <table class="measurement-table">
+                            <thead>
+                                <tr>
+                                    <th>${trans.point}</th>
+                                    <th>Angle</th>
+                                    <th>Inner Radius</th>
+                                    <th>Outer Radius</th>
+                                    <th>Sum</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="measurementTableBody">
+                                ${generateTableRows(section, 'bottom')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Calculate Button (Always Visible) -->
+                <div class="calculate-section" id="calculateSection">
+                    <button class="calculate-btn" onclick="performCalculation()">
+                        <i class="fas fa-calculator"></i> ${trans.calculate}
+                    </button>
+                </div>
+
+                <!-- Results Section -->
+                <div class="results-section" id="resultsSection">
+                    <h3 class="text-center mb-4">
+                        <i class="fas fa-chart-line"></i> ${trans.results}
+                    </h3>
+                    <div id="resultsContent"></div>
+                </div>
+            `;
+            
+            // Setup event listeners
+            setupZeroPoints();
+            collectAllInputs();
+            updateProgress();
+        }
+
+        function generateZeroPointsHTML() {
+            let html = '';
+            for(let i = 1; i <= pointsPerSection; i++) {
+                html += `
+                    <div class="zero-point-item" id="zeroPoint_${i}" onclick="toggleZeroPoint(${i})">
+                        <span>${translations[currentLanguage].point} ${i}</span>
+                    </div>
+                `;
+            }
+            return html;
+        }
+
+        function generateTableRows(section, flange) {
+            let html = '';
+            const angleStep = 360 / pointsPerSection;
+            
+            for(let i = 1; i <= pointsPerSection; i++) {
+                const angle = Math.round((i - 1) * angleStep);
+                const isZeroPoint = zeroPoints.has(i);
+                
+                html += `
+                    <tr>
+                        <td><strong>${i}</strong> ${isZeroPoint ? '<span class="badge bg-success ms-2">ZERO</span>' : ''}</td>
+                        <td>${angle}°</td>
+                        <td>
+                            <input type="number" step="0.01" class="measurement-input ${isZeroPoint ? 'zero-point' : ''}" 
+                                   id="${flange}_inner_${i}" 
+                                   data-flange="${flange}" data-radius="inner" data-point="${i}"
+                                   value="${isZeroPoint ? '0.00' : ''}"
+                                   onchange="updateMeasurement('${flange}', 'inner', ${i}, this.value)">
+                        </td>
+                        <td>
+                            <input type="number" step="0.01" class="measurement-input ${isZeroPoint ? 'zero-point' : ''}" 
+                                   id="${flange}_outer_${i}" 
+                                   data-flange="${flange}" data-radius="outer" data-point="${i}"
+                                   value="${isZeroPoint ? '0.00' : ''}"
+                                   onchange="updateMeasurement('${flange}', 'outer', ${i}, this.value)">
+                        </td>
+                        <td>
+                            <span class="sum-value" id="sum_${flange}_${i}">-</span>
+                        </td>
+                        <td>
+                            <span class="status-badge status-ok" id="status_${flange}_${i}">OK</span>
+                        </td>
+                    </tr>
+                `;
+            }
+            return html;
+        }
+
+        function updatePointsCount() {
+            const select = document.getElementById('pointsCount');
+            pointsPerSection = parseInt(select.value);
+        }
+
+        function applyPointsCount() {
+            if(currentSection) {
+                // Clear zero points and sum errors
+                zeroPoints.clear();
+                sumErrorPoints.clear();
+                
+                // Regenerate content with new points count
+                generateSectionContent(currentSection);
+                
+                // Show notification
+                showNotification(translations[currentLanguage].pointsApplied, 'success');
+            }
+        }
+
+        function setupZeroPoints() {
+            zeroPoints.clear();
+            sumErrorPoints.clear();
+            document.querySelectorAll('.zero-point-item').forEach(item => {
+                item.classList.remove('active');
+            });
+        }
+
+        function toggleZeroPoint(point) {
+            const pointElement = document.getElementById(`zeroPoint_${point}`);
+            
+            if(zeroPoints.has(point)) {
+                zeroPoints.delete(point);
+                pointElement.classList.remove('active');
+                // Remove zero-point class and clear values
+                document.querySelectorAll(`[data-point="${point}"]`).forEach(input => {
+                    input.classList.remove('zero-point');
+                    if(input.value === '0.00') {
+                        input.value = '';
+                    }
+                });
+            } else {
+                zeroPoints.add(point);
+                pointElement.classList.add('active');
+                // Add zero-point class and set values
+                document.querySelectorAll(`[data-point="${point}"]`).forEach(input => {
+                    input.classList.add('zero-point');
+                    input.value = '0.00';
+                    updateMeasurement(input.dataset.flange, input.dataset.radius, point, '0.00');
+                });
+            }
+            
+            updateProgress();
+        }
+
+        function switchFlange(flange) {
+            currentFlange = flange;
+            const trans = translations[currentLanguage];
+            
+            // Update tab buttons
+            document.querySelectorAll('.flange-tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update title
+            document.getElementById('currentFlangeTitle').textContent = 
+                flange === 'bottom' ? trans.bottomFlange : trans.topFlange;
+            
+            // Regenerate table
+            const tbody = document.getElementById('measurementTableBody');
+            tbody.innerHTML = generateTableRows(currentSection, flange);
+            
+            // Re-setup zero points
+            zeroPoints.forEach(point => {
+                document.querySelectorAll(`[data-point="${point}"]`).forEach(input => {
+                    input.classList.add('zero-point');
+                    input.value = '0.00';
+                });
+            });
+            
+            // Update progress
+            collectAllInputs();
+            updateProgress();
+        }
+
+        function collectAllInputs() {
+            allInputs = Array.from(document.querySelectorAll('.measurement-input'));
+        }
+
+        function updateMeasurement(flange, radius, point, value) {
+            const numValue = parseFloat(value) || 0;
+            const input = document.getElementById(`${flange}_${radius}_${point}`);
+            
+            // Check for error values (> 2.0)
+            if(Math.abs(numValue) > MAX_LIMIT) {
+                input.classList.add('error');
+                hasErrorValues = true;
+                document.getElementById('errorMessage').classList.add('show');
+            } else {
+                input.classList.remove('error');
+            }
+            
+            // Store in measurement data
+            if(!measurementData[currentSection][flange][point]) {
+                measurementData[currentSection][flange][point] = {};
+            }
+            measurementData[currentSection][flange][point][radius] = numValue;
+            
+            // Add filled class
+            if(value && value !== '0.00') {
+                input.classList.add('filled');
+            } else {
+                input.classList.remove('filled');
+            }
+            
+            // Check sum validation
+            checkSumValidation(flange, point);
+            
+            // Update status
+            updatePointStatus(flange, point);
+            
+            // Update progress
+            updateProgress();
+            
+            // Check if any error values exist
+            checkForErrorValues();
+        }
+
+        function checkSumValidation(flange, point) {
+            const pointData = measurementData[currentSection][flange][point];
+            if(pointData && pointData.inner !== null && pointData.outer !== null) {
+                const sum = Math.abs(pointData.inner) + Math.abs(pointData.outer);
+                const sumElement = document.getElementById(`sum_${flange}_${point}`);
+                
+                if(sum > SUM_LIMIT) {
+                    sumErrorPoints.add(point);
+                    sumElement.textContent = sum.toFixed(3) + ' mm';
+                    sumElement.style.color = 'var(--danger-color)';
+                    sumElement.style.fontWeight = 'bold';
+                    
+                    // Add error class to both inputs
+                    document.getElementById(`${flange}_inner_${point}`).classList.add('sum-error');
+                    document.getElementById(`${flange}_outer_${point}`).classList.add('sum-error');
+                    
+                    // Show sum error message
+                    document.getElementById('sumErrorMessage').classList.add('show');
+                    updatePointErrorList();
+                } else {
+                    sumErrorPoints.delete(point);
+                    sumElement.textContent = sum.toFixed(3) + ' mm';
+                    sumElement.style.color = 'var(--text-light)';
+                    sumElement.style.fontWeight = 'normal';
+                    
+                    // Remove error class
+                    document.getElementById(`${flange}_inner_${point}`).classList.remove('sum-error');
+                    document.getElementById(`${flange}_outer_${point}`).classList.remove('sum-error');
+                    
+                    // Hide sum error message if no errors
+                    if(sumErrorPoints.size === 0) {
+                        document.getElementById('sumErrorMessage').classList.remove('show');
+                        document.getElementById('pointErrorList').style.display = 'none';
+                    }
+                }
+            }
+        }
+
+        function updatePointErrorList() {
+            const errorList = document.getElementById('pointErrorList');
+            const errorItems = document.getElementById('pointErrorItems');
+            
+            if(sumErrorPoints.size > 0) {
+                errorList.style.display = 'block';
+                let html = '';
+                
+                sumErrorPoints.forEach(point => {
+                    const pointData = measurementData[currentSection][currentFlange][point];
+                    if(pointData) {
+                        const inner = pointData.inner || 0;
+                        const outer = pointData.outer || 0;
+                        const sum = Math.abs(inner) + Math.abs(outer);
+                        
+                        html += `
+                            <div class="point-error-item">
+                                <div class="point-error-info">
+                                    <strong>Point ${point}:</strong> 
+                                    Inner: ${inner.toFixed(3)}mm, 
+                                    Outer: ${outer.toFixed(3)}mm, 
+                                    Sum: ${sum.toFixed(3)}mm
+                                </div>
+                                <div class="point-error-solution">
+                                    HEAT Required
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+                
+                errorItems.innerHTML = html;
+            } else {
+                errorList.style.display = 'none';
+            }
+        }
+
+        function checkForErrorValues() {
+            hasErrorValues = false;
+            allInputs.forEach(input => {
+                const value = parseFloat(input.value) || 0;
+                if(Math.abs(value) > MAX_LIMIT) {
+                    hasErrorValues = true;
+                }
+            });
+            
+            const errorMessage = document.getElementById('errorMessage');
+            if(hasErrorValues) {
+                errorMessage.classList.add('show');
+            } else {
+                errorMessage.classList.remove('show');
+            }
+        }
+
+        function updatePointStatus(flange, point) {
+            const statusElement = document.getElementById(`status_${flange}_${point}`);
+            
+            let maxDeviation = 0;
+            
+            // Check both radii for this point
+            const pointData = measurementData[currentSection][flange][point];
+            if(pointData) {
+                if(pointData.inner !== null && pointData.inner !== undefined) {
+                    maxDeviation = Math.max(maxDeviation, Math.abs(pointData.inner));
+                }
+                if(pointData.outer !== null && pointData.outer !== undefined) {
+                    maxDeviation = Math.max(maxDeviation, Math.abs(pointData.outer));
+                }
+            }
+            
+            // Update status badge based on new rules
+            if(sumErrorPoints.has(point)) {
+                statusElement.className = 'status-badge status-error';
+                statusElement.textContent = 'SUM ERROR';
+            } else if(maxDeviation > MAX_LIMIT) {
+                statusElement.className = 'status-badge status-error';
+                statusElement.textContent = 'ERROR';
+            } else if(maxDeviation > TOLERANCE_LIMIT) {
+                statusElement.className = 'status-badge status-critical';
+                statusElement.textContent = 'CRITICAL';
+            } else if(maxDeviation > TOLERANCE_LIMIT * 0.5) {
+                statusElement.className = 'status-badge status-warning';
+                statusElement.textContent = 'WARNING';
+            } else {
+                statusElement.className = 'status-badge status-ok';
+                statusElement.textContent = 'OK';
+            }
+        }
+
+        function updateProgress() {
+            const totalInputs = allInputs.filter(input => !input.classList.contains('zero-point')).length;
+            const filledInputs = allInputs.filter(input => 
+                !input.classList.contains('zero-point') && input.value
+            ).length;
+            
+            const percentage = totalInputs > 0 ? Math.round((filledInputs / totalInputs) * 100) : 0;
+            
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = percentage + '%';
+            
+            // Enable/Disable calculate button
+            const calculateSection = document.getElementById('calculateSection');
+            if(percentage === 100) {
+                calculateSection.classList.add('show');
+            } else {
+                calculateSection.classList.remove('show');
+            }
+        }
+
+        function performCalculation() {
+            // Check if all inputs are filled
+            const totalInputs = allInputs.filter(input => !input.classList.contains('zero-point')).length;
+            const filledInputs = allInputs.filter(input => 
+                !input.classList.contains('zero-point') && input.value
+            ).length;
+            
+            if(filledInputs < totalInputs) {
+                showNotification(`${translations[currentLanguage].fillAll} (${filledInputs}/${totalInputs} filled)`, 'warning');
+                return;
+            }
+            
+            // Check for error values
+            if(hasErrorValues || sumErrorPoints.size > 0) {
+                showNotification(
+                    hasErrorValues ? 
+                    translations[currentLanguage].errorValues : 
+                    translations[currentLanguage].sumErrorValues, 
+                    'danger'
+                );
+                return;
+            }
+            
+            showLoading();
+            
+            setTimeout(() => {
+                const results = calculateFlatness();
+                displayResults(results);
+                hideLoading();
+                
+                // Scroll to results
+                document.getElementById('resultsSection').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 1500);
+        }
+
+        function calculateFlatness() {
+            const flangeData = measurementData[currentSection][currentFlange];
+            let allValues = [];
+            let maxValue = -Infinity;
+            let minValue = Infinity;
+            
+            // Collect all values
+            for(let point = 1; point <= pointsPerSection; point++) {
+                const pointData = flangeData[point];
+                if(pointData) {
+                    if(pointData.inner !== null && pointData.inner !== undefined) {
+                        const val = pointData.inner;
+                        allValues.push({point, radius: 'inner', value: val});
+                        maxValue = Math.max(maxValue, val);
+                        minValue = Math.min(minValue, val);
+                    }
+                    
+                    if(pointData.outer !== null && pointData.outer !== undefined) {
+                        const val = pointData.outer;
+                        allValues.push({point, radius: 'outer', value: val});
+                        maxValue = Math.max(maxValue, val);
+                        minValue = Math.min(minValue, val);
+                    }
+                }
+            }
+            
+            const currentFlatness = maxValue - minValue;
+            const maxDeviation = Math.max(Math.abs(maxValue), Math.abs(minValue));
+            
+            // Check point differences
+            let maxPointDiff = 0;
+            for(let i = 0; i < allValues.length; i++) {
+                for(let j = i + 1; j < allValues.length; j++) {
+                    const diff = Math.abs(allValues[i].value - allValues[j].value);
+                    maxPointDiff = Math.max(maxPointDiff, diff);
+                }
+            }
+            
+            // Generate corrections
+            const corrections = [];
+            const heatingCoeff = 0.7;
+            const maxHeating = 1.5;
+            
+            allValues.forEach(item => {
+                if(Math.abs(item.value) > TOLERANCE_LIMIT * 0.3) {
+                    const correction = -item.value * heatingCoeff;
+                    const finalCorrection = Math.max(-maxHeating, Math.min(maxHeating, correction));
+                    
+                    corrections.push({
+                        point: item.point,
+                        radius: item.radius,
+                        currentValue: item.value,
+                        correction: Math.round(finalCorrection * 1000) / 1000,
+                        operation: finalCorrection > 0 ? 'HEAT' : 'COOL',
+                        priority: Math.abs(item.value) > TOLERANCE_LIMIT ? 'High' : 
+                                 Math.abs(item.value) > TOLERANCE_LIMIT * 0.6 ? 'Medium' : 'Low'
+                    });
+                }
+            });
+            
+            // Sort by priority and deviation
+            corrections.sort((a, b) => {
+                const priorityOrder = { 'High': 3, 'Medium': 2, 'Low': 1 };
+                if(priorityOrder[b.priority] !== priorityOrder[a.priority]) {
+                    return priorityOrder[b.priority] - priorityOrder[a.priority];
+                }
+                return Math.abs(b.currentValue) - Math.abs(a.currentValue);
+            });
+            
+            const isAcceptable = currentFlatness <= TOLERANCE_LIMIT && 
+                                maxDeviation <= MAX_LIMIT && 
+                                maxPointDiff <= POINT_DIFF_LIMIT &&
+                                sumErrorPoints.size === 0;
+            
+            return {
+                section: currentSection,
+                flange: currentFlange,
+                currentFlatness: currentFlatness.toFixed(3),
+                targetFlatness: TOLERANCE_LIMIT.toFixed(3),
+                maxDeviation: maxDeviation.toFixed(3),
+                maxValue: maxValue.toFixed(3),
+                minValue: minValue.toFixed(3),
+                maxPointDiff: maxPointDiff.toFixed(3),
+                isAcceptable: isAcceptable,
+                corrections: corrections,
+                sumErrorPoints: Array.from(sumErrorPoints)
+            };
+        }
+
+        function displayResults(results) {
+            const resultsSection = document.getElementById('resultsSection');
+            const resultsContent = document.getElementById('resultsContent');
+            const trans = translations[currentLanguage];
+            
+            resultsContent.innerHTML = `
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="result-card text-center">
+                            <h5 class="text-muted">${trans.currentFlatness}</h5>
+                            <h2 class="${results.isAcceptable ? 'text-success' : 'text-danger'}">
+                                ${results.currentFlatness} mm
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="result-card text-center">
+                            <h5 class="text-muted">${trans.targetFlatness}</h5>
+                            <h2 class="text-primary">${results.targetFlatness} mm</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="result-card text-center">
+                            <h5 class="text-muted">${trans.maxDeviation}</h5>
+                            <h2 class="text-warning">${results.maxDeviation} mm</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="result-card text-center">
+                            <h5 class="text-muted">Max Point Diff</h5>
+                            <h2 class="text-info">${results.maxPointDiff} mm</h2>
+                        </div>
+                    </div>
+                </div>
+                
+                ${results.sumErrorPoints.length > 0 ? `
+                    <div class="alert alert-danger mt-3">
+                        <h5><i class="fas fa-exclamation-triangle"></i> ${trans.heatingSolution}</h5>
+                        <p>The following points require HEATING to fix the sum error:</p>
+                        <div class="d-flex flex-wrap gap-2 mt-2">
+                            ${results.sumErrorPoints.map(point => 
+                                `<span class="badge bg-danger">Point ${point}</span>`
+                            ).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+                
+                ${results.corrections.length > 0 ? `
+                    <h4 class="mt-4 mb-3">
+                        <i class="fas fa-tools"></i> ${trans.correctionPlan} - ${results.flange.toUpperCase()} Flange
+                    </h4>
+                    <div class="table-responsive">
+                        <table class="correction-table">
+                            <thead>
+                                <tr>
+                                    <th>${trans.point}</th>
+                                    <th>${trans.radius}</th>
+                                    <th>${trans.currentValue}</th>
+                                    <th>${trans.correction}</th>
+                                    <th>${trans.operation}</th>
+                                    <th>${trans.priority}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${results.corrections.map((corr, index) => `
+                                    <tr style="animation: fadeIn 0.5s ease ${index * 0.1}s both">
+                                        <td><strong>${corr.point}</strong></td>
+                                        <td>${corr.radius.toUpperCase()}</td>
+                                        <td>${corr.currentValue.toFixed(3)} mm</td>
+                                        <td>
+                                            <span class="correction-value ${corr.operation === 'HEAT' ? 'heat' : 'cool'}">
+                                                ${Math.abs(corr.correction).toFixed(3)} mm
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <strong class="${corr.operation === 'HEAT' ? 'text-danger' : 'text-primary'}">
+                                                ${corr.operation}
+                                            </strong>
+                                        </td>
+                                        <td>
+                                            <span class="priority-badge priority-${corr.priority.toLowerCase()}">
+                                                ${corr.priority}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Action Steps -->
+                    <div class="action-steps">
+                        <h4 class="mb-3">
+                            <i class="fas fa-list-ol"></i> ${trans.actionSteps}
+                        </h4>
+                        <div class="step-item">
+                            <span class="step-number">1</span> ${trans.step1}
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">2</span> ${trans.step2}
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">3</span> ${trans.step3}
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">4</span> ${trans.step4}
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">5</span> ${trans.step5}
+                        </div>
+                    </div>
+                ` : `
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle fa-2x"></i>
+                        <h4 class="mt-2">${trans.excellent}</h4>
+                        <p>${trans.allGood}</p>
+                    </div>
+                `}
+            `;
+            
+            resultsSection.style.display = 'block';
+            resultsSection.classList.add('show');
+        }
+
+        function showLoading() {
+            document.getElementById('loadingOverlay').classList.add('show');
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingOverlay').classList.remove('show');
+        }
+
+        function showNotification(message, type) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type} position-fixed`;
+            notification.style.cssText = `
+                top: 80px;
+                right: 20px;
+                z-index: 10001;
+                min-width: 300px;
+                animation: slideInRight 0.5s ease;
+            `;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'}"></i>
+                ${message}
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.5s ease';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 3000);
+        }
+
+        // Add slide animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOutRight {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+            .sum-error {
+                background: rgba(239, 68, 68, 0.1) !important;
+                border-color: var(--danger-color) !important;
+                color: var(--danger-color) !important;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
