@@ -3,16 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
     <title>Flange Measurement Tool</title>
-=======
-    <title>Flange Flatness Correction Tool</title>
->>>>>>> 0ffcb29fddf309701a86ee2bd12e338735c2099f
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-<<<<<<< HEAD
             --primary-color: #2c3e50;
             --secondary-color: #3498db;
             --success-color: #27ae60;
@@ -25,16 +20,6 @@
             --text-light: #ffffff;
             --border-color: #bdc3c7;
             --shadow: 0 2px 10px rgba(0,0,0,0.1);
-=======
-            --primary-color: #2563eb;
-            --secondary-color: #64748b;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --danger-color: #ef4444;
-            --dark-color: #1e293b;
-            --light-color: #f8fafc;
-            --border-radius: 12px;
->>>>>>> 0ffcb29fddf309701a86ee2bd12e338735c2099f
             --transition: all 0.3s ease;
         }
 
@@ -48,17 +33,12 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-<<<<<<< HEAD
             color: var(--text-dark);
-=======
-            padding: 20px;
->>>>>>> 0ffcb29fddf309701a86ee2bd12e338735c2099f
         }
 
-        .main-container {
+        .container {
             max-width: 1400px;
             margin: 0 auto;
-<<<<<<< HEAD
             padding: 20px;
         }
 
@@ -82,40 +62,6 @@
         }
 
         .logo i {
-=======
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: var(--border-radius);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-        }
-
-        .header {
-            background: linear-gradient(135deg, var(--primary-color), #6366f1);
-            color: white;
-            padding: 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 30s linear infinite;
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .header h1 {
->>>>>>> 0ffcb29fddf309701a86ee2bd12e338735c2099f
             font-size: 2.5rem;
             color: var(--secondary-color);
         }
@@ -124,7 +70,6 @@
             color: var(--primary-color);
             font-size: 2rem;
             font-weight: 700;
-<<<<<<< HEAD
         }
 
         .header-buttons {
@@ -598,505 +543,6 @@
             justify-content: center;
             font-weight: 700;
             flex-shrink: 0;
-=======
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            position: relative;
-            z-index: 1;
-        }
-
-        .controls {
-            padding: 30px;
-            background: var(--light-color);
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .section-buttons {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .section-btn {
-            padding: 15px;
-            border: none;
-            border-radius: var(--border-radius);
-            background: white;
-            color: var(--dark-color);
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .section-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .section-btn.active {
-            background: var(--primary-color);
-            color: white;
-            transform: scale(1.05);
-        }
-
-        .points-selector {
-            background: white;
-            padding: 20px;
-            border-radius: var(--border-radius);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .points-selector h5 {
-            color: var(--dark-color);
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .points-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .point-btn {
-            padding: 10px;
-            border: 2px solid var(--primary-color);
-            border-radius: 8px;
-            background: white;
-            color: var(--primary-color);
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .point-btn:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: scale(1.05);
-        }
-
-        .point-btn.active {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .main-content {
-            padding: 30px;
-        }
-
-        .flange-tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-            gap: 20px;
-        }
-
-        .flange-tab {
-            padding: 12px 30px;
-            border: none;
-            border-radius: var(--border-radius);
-            background: white;
-            color: var(--dark-color);
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .flange-tab:hover {
-            transform: translateY(-2px);
-        }
-
-        .flange-tab.active {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .measurement-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            background: white;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .measurement-table thead {
-            background: linear-gradient(135deg, var(--primary-color), #6366f1);
-            color: white;
-        }
-
-        .measurement-table th {
-            padding: 15px;
-            text-align: center;
-            font-weight: 600;
-            border: none;
-        }
-
-        .measurement-table td {
-            padding: 10px;
-            text-align: center;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .measurement-table tbody tr:hover {
-            background: #f8fafc;
-        }
-
-        .measurement-input {
-            width: 100px;
-            padding: 8px;
-            border: 2px solid #e5e7eb;
-            border-radius: 6px;
-            text-align: center;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .measurement-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        .measurement-input.filled {
-            background: #f0f9ff;
-            border-color: var(--primary-color);
-        }
-
-        .measurement-input.error {
-            background: #fef2f2;
-            border-color: var(--danger-color);
-            color: var(--danger-color);
-        }
-
-        .measurement-input.zero-point {
-            background: #f0fdf4;
-            border-color: var(--success-color);
-            color: var(--success-color);
-        }
-
-        .status-badge {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .status-ok {
-            background: #dcfce7;
-            color: #166534;
-        }
-
-        .status-warning {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .status-critical {
-            background: #fed7aa;
-            color: #9a3412;
-        }
-
-        .status-error {
-            background: #fecaca;
-            color: #991b1b;
-        }
-
-        .progress-bar-container {
-            margin: 30px 0;
-        }
-
-        .progress {
-            height: 25px;
-            border-radius: 15px;
-            background: #e5e7eb;
-            overflow: hidden;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary-color), #6366f1);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            transition: width 0.5s ease;
-        }
-
-        .calculate-btn {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: var(--border-radius);
-            background: linear-gradient(135deg, var(--success-color), #059669);
-            color: white;
-            font-size: 1.2rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-        }
-
-        .calculate-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(16, 185, 129, 0.4);
-        }
-
-        .results-section {
-            margin-top: 40px;
-            padding: 30px;
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-            display: none;
-        }
-
-        .results-section.show {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .result-card {
-            padding: 20px;
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: var(--transition);
-        }
-
-        .result-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .correction-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            background: white;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-        }
-
-        .correction-table thead {
-            background: linear-gradient(135deg, var(--warning-color), #d97706);
-            color: white;
-        }
-
-        .correction-table th {
-            padding: 12px;
-            text-align: center;
-            font-weight: 600;
-        }
-
-        .correction-table td {
-            padding: 10px;
-            text-align: center;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .correction-value {
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-weight: 600;
-        }
-
-        .correction-value.heat {
-            background: #fef2f2;
-            color: var(--danger-color);
-        }
-
-        .correction-value.cool {
-            background: #eff6ff;
-            color: var(--primary-color);
-        }
-
-        .priority-badge {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .priority-high {
-            background: #fecaca;
-            color: #991b1b;
-        }
-
-        .priority-medium {
-            background: #fed7aa;
-            color: #9a3412;
-        }
-
-        .priority-low {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .action-steps {
-            margin-top: 30px;
-            padding: 25px;
-            background: linear-gradient(135deg, #f8fafc, #e5e7eb);
-            border-radius: var(--border-radius);
-        }
-
-        .step-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding: 15px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
-
-        .step-number {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: var(--primary-color);
-            color: white;
-            border-radius: 50%;
-            font-weight: 700;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-
-        .zero-points-section {
-            margin: 30px 0;
-            padding: 25px;
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .zero-points-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .zero-point-item {
-            padding: 10px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            background: white;
-            font-weight: 600;
-        }
-
-        .zero-point-item:hover {
-            border-color: var(--primary-color);
-            background: #f0f9ff;
-        }
-
-        .zero-point-item.active {
-            background: var(--success-color);
-            color: white;
-            border-color: var(--success-color);
-        }
-
-        .validation-info {
-            background: #eff6ff;
-            border: 1px solid #bfdbfe;
-            border-radius: var(--border-radius);
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .validation-info h5 {
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-
-        .validation-info ul {
-            margin: 0;
-            padding-left: 20px;
-        }
-
-        .validation-info li {
-            margin-bottom: 5px;
-            color: var(--dark-color);
-        }
-
-        .error-message {
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            color: var(--danger-color);
-            padding: 15px;
-            border-radius: var(--border-radius);
-            margin-bottom: 20px;
-            display: none;
-            animation: shake 0.5s ease;
-        }
-
-        .error-message.show {
-            display: block;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
-
-        .point-error-list {
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            border-radius: var(--border-radius);
-            padding: 20px;
-            margin-bottom: 20px;
-            display: none;
-        }
-
-        .point-error-list h5 {
-            color: var(--danger-color);
-            margin-bottom: 15px;
-        }
-
-        .point-error-item {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .point-error-solution {
-            background: var(--danger-color);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.9rem;
->>>>>>> 0ffcb29fddf309701a86ee2bd12e338735c2099f
         }
 
         .error-list {
@@ -1112,25 +558,9 @@
             display: block;
         }
 
-<<<<<<< HEAD
         .error-list h5 {
             color: #721c24;
             margin-bottom: 10px;
-=======
-        .loading-content {
-            text-align: center;
-            color: white;
-        }
-
-        .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
->>>>>>> 0ffcb29fddf309701a86ee2bd12e338735c2099f
         }
 
         .error-list ul {
@@ -1139,7 +569,6 @@
             padding-left: 20px;
         }
 
-<<<<<<< HEAD
         #errorMessage {
             background: #f8d7da;
             border: 1px solid #f5c6cb;
@@ -1407,34 +836,6 @@
             display: flex;
             align-items: center;
             gap: 8px;
-=======
-        .lang-switcher {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 10;
-        }
-
-        .lang-btn {
-            padding: 8px 15px;
-            border: 2px solid white;
-            background: transparent;
-            color: white;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 600;
-        }
-
-        .lang-btn:hover {
-            background: white;
-            color: var(--primary-color);
-        }
-
-        .lang-btn.active {
-            background: white;
-            color: var(--primary-color);
->>>>>>> 0ffcb29fddf309701a86ee2bd12e338735c2099f
         }
 
         @media (max-width: 768px) {
@@ -1442,7 +843,6 @@
                 grid-template-columns: 1fr;
             }
 
-<<<<<<< HEAD
             .sidebar {
                 position: static;
             }
@@ -1455,33 +855,11 @@
             .modal-content {
                 width: 95%;
                 margin: 10px;
-=======
-            .section-buttons {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .points-grid {
-                grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-            }
-
-            .measurement-input {
-                width: 80px;
-            }
-
-            .flange-tabs {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .zero-points-grid {
-                grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
->>>>>>> 0ffcb29fddf309701a86ee2bd12e338735c2099f
             }
         }
     </style>
 </head>
 <body>
-<<<<<<< HEAD
     <div class="container">
         <header>
             <div class="logo">
@@ -1678,86 +1056,16 @@
                         <p id="modalResultExplanation">After applying these corrections, all 3 points will be 0.000</p>
                     </div>
                 </div>
-=======
-    <div class="main-container">
-        <!-- Header -->
-        <header class="header">
-            <div class="lang-switcher">
-                <button class="lang-btn active" onclick="changeLanguage('en')">EN</button>
-                <button class="lang-btn" onclick="changeLanguage('hi')">हिं</button>
-            </div>
-            <h1 data-en="Flange Flatness Correction Tool" data-hi="फ्लेंज फ्लैटनेस सुधार उपकरण">
-                Flange Flatness Correction Tool
-            </h1>
-            <p data-en="Professional Measurement & Correction System" data-hi="पेशेवर माप और सुधार प्रणाली">
-                Professional Measurement & Correction System
-            </p>
-        </header>
-
-        <!-- Controls -->
-        <div class="controls">
-            <div class="section-buttons">
-                <button class="section-btn" onclick="selectSection(1)">
-                    <i class="fas fa-circle"></i> Section 1
-                </button>
-                <button class="section-btn" onclick="selectSection(2)">
-                    <i class="fas fa-circle"></i> Section 2
-                </button>
-                <button class="section-btn" onclick="selectSection(3)">
-                    <i class="fas fa-circle"></i> Section 3
-                </button>
-                <button class="section-btn" onclick="selectSection(4)">
-                    <i class="fas fa-circle"></i> Section 4
-                </button>
-                <button class="section-btn" onclick="selectSection(5)">
-                    <i class="fas fa-circle"></i> Section 5
-                </button>
-            </div>
-
-            <!-- Points Selector -->
-            <div class="points-selector" id="pointsSelector">
-                <h5 data-en="Select Number of Points" data-hi="अंकों की संख्या चुनें">
-                    Select Number of Points
-                </h5>
-                <div class="points-grid">
-                    <button class="point-btn" onclick="setPoints(8)">8</button>
-                    <button class="point-btn" onclick="setPoints(12)">12</button>
-                    <button class="point-btn" onclick="setPoints(16)">16</button>
-                    <button class="point-btn" onclick="setPoints(20)">20</button>
-                    <button class="point-btn" onclick="setPoints(24)">24</button>
-                    <button class="point-btn" onclick="setPoints(28)">28</button>
-                    <button class="point-btn" onclick="setPoints(32)">32</button>
-                    <button class="point-btn" onclick="setPoints(36)">36</button>
-                    <button class="point-btn active" onclick="setPoints(40)">40</button>
-                </div>
-                <div class="text-muted small" data-en="Current: 40 points" data-hi="वर्तमान: 40 अंक">
-                    Current: 40 points
-                </div>
-            </div>
-        </div>
-
-        <!-- Main Content -->
-        <div class="main-content" id="mainContent">
-            <div class="text-center text-muted py-5">
-                <i class="fas fa-hand-pointer fa-3x mb-3"></i>
-                <h4 data-en="Please select a section to begin" data-hi="शुरू करने के लिए कृपया एक सेक्शन चुनें">
-                    Please select a section to begin
-                </h4>
->>>>>>> 0ffcb29fddf309701a86ee2bd12e338735c2099f
             </div>
         </div>
     </div>
 
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-content">
-            <div class="loading-spinner"></div>
-            <h3 data-en="Calculating..." data-hi="गणना कर रहे हैं...">Calculating...</h3>
-        </div>
+        <div class="spinner"></div>
     </div>
 
     <script>
-<<<<<<< HEAD
         // Global variables
         let currentSection = 'section1';
         let currentFlange = 'left';
@@ -1802,37 +1110,6 @@
                 progress: "Progress",
                 calculate: "Calculate Flatness",
                 results: "Calculation Results",
-=======
-        // Global Variables
-        let currentSection = null;
-        let currentFlange = 'bottom';
-        let currentLanguage = 'en';
-        let pointsPerSection = 40; // Default to 40 points
-        let allInputs = [];
-        let zeroPoints = new Set();
-        let sumErrorPoints = new Set();
-        let hasErrorValues = false;
-        
-        // Data Storage
-        const sectionsData = {};
-        const measurementData = {};
-        
-        // Constants
-        const TOLERANCE_LIMIT = 0.70;
-        const MAX_LIMIT = 2.0;
-        const POINT_DIFF_LIMIT = 2.0;
-        const SUM_LIMIT = 2.0;
-        
-        // Translations
-        const translations = {
-            en: {
-                bottomFlange: "Bottom Flange",
-                topFlange: "Top Flange",
-                measurement: "Measurement",
-                point: "Point",
-                calculate: "Calculate",
-                results: "Simulation Results",
->>>>>>> 0ffcb29fddf309701a86ee2bd12e338735c2099f
                 currentFlatness: "Current Flatness",
                 targetFlatness: "Target Flatness",
                 maxDeviation: "Max Deviation",
@@ -1853,7 +1130,6 @@
                 errorValues: "Error: Some values exceed the maximum limit!",
                 sumErrorValues: "Error: Sum error detected in some points!",
                 excellent: "Excellent!",
-<<<<<<< HEAD
                 allGood: "All measurements are within acceptable limits",
                 heatingSolution: "Heating Solution Required",
                 zeroPoint: "Zero Point"
@@ -1894,63 +1170,6 @@
                 allGood: "所有测量值都在可接受范围内",
                 heatingSolution: "需要加热解决方案",
                 zeroPoint: "零点"
-=======
-                allGood: "All measurements are within tolerance. No correction needed.",
-                fillAll: "Please complete all measurements!",
-                pointsApplied: "Points applied successfully!",
-                calculationComplete: "Calculation Complete!",
-                errorValues: "Error: Some values exceed 2.0mm! Please correct them.",
-                sumErrorValues: "Error: Inner + Outer sum exceeds 2.0mm at some points!",
-                validationRules: "Validation Rules:",
-                rule1: "Maximum value must be less than 2.0mm",
-                rule2: "Tolerance limit: 0.70mm",
-                rule3: "Difference between two points must be less than 2.0mm",
-                rule4: "Inner + Outer sum must be less than 2.0mm",
-                autoCorrection: "Applying auto-correction...",
-                heatingSolution: "HEATING Solution",
-                zeroPoints: "Select Zero Points",
-                selectPoints: "Select Number of Points"
-            },
-            hi: {
-                bottomFlange: "निचला फ्लेंज",
-                topFlange: "ऊपरी फ्लेंज",
-                measurement: "माप",
-                point: "अंक",
-                calculate: "गणना करें",
-                results: "सिमुलेशन परिणाम",
-                currentFlatness: "वर्तमान समतलता",
-                targetFlatness: "लक्ष्य समतलता",
-                maxDeviation: "अधिकतम विचलन",
-                correctionPoints: "सुधार बिंदु",
-                correctionPlan: "सुधार योजना",
-                radius: "त्रिज्या",
-                currentValue: "वर्तमान मान",
-                correction: "सुधार",
-                operation: "ऑपरेशन",
-                priority: "प्राथमिकता",
-                actionSteps: "कार्रवाई चरण - फ्लेंज ठीक करने के लिए",
-                step1: "उच्च प्राथमिकता वाले बिंदुओं पर पहले काम करें",
-                step2: "HEAT क्षेत्रों को धीरे-धीरे गर्म करें (200-300°C)",
-                step3: "COOL क्षेत्रों को धीरे-धीरे ठंडा करें",
-                step4: "प्रत्येक सुधार के बाद माप दोहराएं",
-                step5: "समतलता < 0.70mm होने तक जारी रखें",
-                excellent: "उत्कृष्ट!",
-                allGood: "सभी माप सहिष्णुता के भीतर हैं। कोई सुधार की आवश्यकता नहीं।",
-                fillAll: "कृपया सभी माप पूर्ण करें!",
-                pointsApplied: "अंक सफलतापूर्वक लागू किए गए!",
-                calculationComplete: "गणना पूर्ण!",
-                errorValues: "त्रुटि: कुछ मान 2.0mm से अधिक हैं! कृपया उन्हें सुधारें।",
-                sumErrorValues: "त्रुटि: कुछ बिंदुओं पर Inner + Outer योग 2.0mm से अधिक है!",
-                validationRules: "सत्यापन नियम:",
-                rule1: "अधिकतम मान 2.0mm से कम होना चाहिए",
-                rule2: "सहिष्णुता सीमा: 0.70mm",
-                rule3: "दो बिंदुओं के बीच अंतर 2.0mm से कम होना चाहिए",
-                rule4: "Inner + Outer योग 2.0mm से कम होना चाहिए",
-                autoCorrection: "ऑटो-सुधार लागू कर रहे हैं...",
-                heatingSolution: "HEATING समाधान",
-                zeroPoints: "शून्य बिंदु चुनें",
-                selectPoints: "अंकों की संख्या चुनें"
->>>>>>> 0ffcb29fddf309701a86ee2bd12e338735c2099f
             }
         };
 
@@ -1988,7 +1207,6 @@
             const measurementsGrid = document.getElementById('measurementsGrid');
             measurementsGrid.innerHTML = '';
             
-<<<<<<< HEAD
             for(let i = 1; i <= pointsPerSection; i++) {
                 const card = document.createElement('div');
                 card.className = 'point-card';
@@ -1996,124 +1214,6 @@
                     <div class="point-header">
                         <span class="point-number">Point ${i}</span>
                         <span class="status-badge status-ok" id="status_${currentFlange}_${i}">OK</span>
-=======
-            // Update button states
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Update all text elements
-            updateAllText();
-        }
-
-        function updateAllText() {
-            const trans = translations[currentLanguage];
-            
-            // Update all elements with data-hi and data-en attributes
-            document.querySelectorAll('[data-hi]').forEach(element => {
-                if(currentLanguage === 'hi') {
-                    element.textContent = element.getAttribute('data-hi');
-                } else {
-                    element.textContent = element.getAttribute('data-en');
-                }
-            });
-            
-            // Update section buttons
-            if(currentSection) {
-                generateSectionContent(currentSection);
-            }
-        }
-
-        function selectSection(section) {
-            currentSection = section;
-            currentFlange = 'bottom';
-            sumErrorPoints.clear(); // Clear sum errors for new section
-            
-            // Update button states
-            document.querySelectorAll('.section-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Show points selector
-            document.getElementById('pointsSelector').classList.add('show');
-            
-            // Generate content for selected section
-            generateSectionContent(section);
-        }
-
-        function setPoints(points) {
-            pointsPerSection = points;
-            
-            // Update button states
-            document.querySelectorAll('.point-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Update current points display
-            const display = document.querySelector('.points-selector .text-muted');
-            if(currentLanguage === 'hi') {
-                display.textContent = `वर्तमान: ${points} अंक`;
-            } else {
-                display.textContent = `Current: ${points} points`;
-            }
-            
-            // If section is already selected, regenerate content
-            if(currentSection) {
-                zeroPoints.clear();
-                sumErrorPoints.clear();
-                generateSectionContent(currentSection);
-                showNotification(
-                    currentLanguage === 'hi' ? 
-                    `${points} अंक सफलतापूर्वक लागू किए गए!` : 
-                    `${points} points applied successfully!`, 
-                    'success'
-                );
-            }
-        }
-
-        function generateSectionContent(section) {
-            const mainContent = document.getElementById('mainContent');
-            const trans = translations[currentLanguage];
-            
-            mainContent.innerHTML = `
-                <!-- Validation Info -->
-                <div class="validation-info">
-                    <h5><i class="fas fa-info-circle"></i> ${trans.validationRules}</h5>
-                    <ul>
-                        <li>${trans.rule1}</li>
-                        <li>${trans.rule2}</li>
-                        <li>${trans.rule3}</li>
-                        <li><strong>${trans.rule4}</strong></li>
-                    </ul>
-                </div>
-
-                <!-- Error Message -->
-                <div class="error-message" id="errorMessage">
-                    <i class="fas fa-exclamation-triangle"></i> ${trans.errorValues}
-                </div>
-
-                <!-- Sum Error Message -->
-                <div class="error-message" id="sumErrorMessage">
-                    <i class="fas fa-exclamation-triangle"></i> ${trans.sumErrorValues}
-                </div>
-
-                <!-- Point Error List -->
-                <div class="point-error-list" id="pointErrorList" style="display: none;">
-                    <h5><i class="fas fa-list"></i> Problematic Points:</h5>
-                    <div id="pointErrorItems"></div>
-                </div>
-
-                <!-- Zero Points Selector -->
-                <div class="zero-points-section">
-                    <h4 class="text-center mb-3">
-                        <i class="fas fa-crosshairs"></i> ${trans.zeroPoints}
-                    </h4>
-                    <div class="zero-points-grid" id="zeroPointsContainer">
-                        ${generateZeroPointsHTML()}
->>>>>>> 0ffcb29fddf309701a86ee2bd12e338735c2099f
                     </div>
                     <div class="radius-inputs">
                         <div class="input-group">
@@ -2139,70 +1239,10 @@
                                    step="0.001">
                         </div>
                     </div>
-<<<<<<< HEAD
-=======
-                </div>
-
-                <!-- Measurement Table -->
-                <div class="measurement-container">
-                    <h4 class="text-center mb-3">
-                        <i class="fas fa-ruler"></i> Section ${section} - 
-                        <span id="currentFlangeTitle">${trans.bottomFlange}</span> ${trans.measurement}
-                    </h4>
-                    <div class="table-responsive" style="max-height: 600px; overflow-y: auto;">
-                        <table class="measurement-table">
-                            <thead>
-                                <tr>
-                                    <th>${trans.point}</th>
-                                    <th>Angle</th>
-                                    <th>Inner Radius</th>
-                                    <th>Outer Radius</th>
-                                    <th>Sum</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="measurementTableBody">
-                                ${generateTableRows(section, 'bottom')}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Calculate Button (Always Visible) -->
-                <div class="calculate-section" id="calculateSection">
-                    <button class="calculate-btn" onclick="performCalculation()">
-                        <i class="fas fa-calculator"></i> ${trans.calculate}
-                    </button>
-                </div>
-
-                <!-- Results Section -->
-                <div class="results-section" id="resultsSection">
-                    <h3 class="text-center mb-4">
-                        <i class="fas fa-chart-line"></i> ${trans.results}
-                    </h3>
-                    <div id="resultsContent"></div>
-                </div>
-            `;
-            
-            // Setup event listeners
-            setupZeroPoints();
-            collectAllInputs();
-            updateProgress();
-        }
-
-        function generateZeroPointsHTML() {
-            let html = '';
-            for(let i = 1; i <= pointsPerSection; i++) {
-                html += `
-                    <div class="zero-point-item" id="zeroPoint_${i}" onclick="toggleZeroPoint(${i})">
-                        <span>${translations[currentLanguage].point} ${i}</span>
-                    </div>
->>>>>>> 0ffcb29fddf309701a86ee2bd12e338735c2099f
                 `;
                 measurementsGrid.appendChild(card);
             }
             
-<<<<<<< HEAD
             // Re-add event listeners
             allInputs = document.querySelectorAll('.point-input');
             allInputs.forEach(input => {
@@ -2222,45 +1262,6 @@
             
             // Update point status
             updatePointStatus(flange, point);
-=======
-            for(let i = 1; i <= pointsPerSection; i++) {
-                const angle = Math.round((i - 1) * angleStep);
-                const isZeroPoint = zeroPoints.has(i);
-                
-                html += `
-                    <tr>
-                        <td><strong>${i}</strong> ${isZeroPoint ? '<span class="badge bg-success ms-2">ZERO</span>' : ''}</td>
-                        <td>${angle}°</td>
-                        <td>
-                            <input type="number" step="0.01" class="measurement-input ${isZeroPoint ? 'zero-point' : ''}" 
-                                   id="${flange}_inner_${i}" 
-                                   data-flange="${flange}" data-radius="inner" data-point="${i}"
-                                   value="${isZeroPoint ? '0.00' : ''}"
-                                   onchange="updateMeasurement('${flange}', 'inner', ${i}, this.value)">
-                        </td>
-                        <td>
-                            <input type="number" step="0.01" class="measurement-input ${isZeroPoint ? 'zero-point' : ''}" 
-                                   id="${flange}_outer_${i}" 
-                                   data-flange="${flange}" data-radius="outer" data-point="${i}"
-                                   value="${isZeroPoint ? '0.00' : ''}"
-                                   onchange="updateMeasurement('${flange}', 'outer', ${i}, this.value)">
-                        </td>
-                        <td>
-                            <span class="sum-value" id="sum_${flange}_${i}">-</span>
-                        </td>
-                        <td>
-                            <span class="status-badge status-ok" id="status_${flange}_${i}">OK</span>
-                        </td>
-                    </tr>
-                `;
-            }
-            return html;
-        }
-
-        function switchFlange(flange) {
-            currentFlange = flange;
-            const trans = translations[currentLanguage];
->>>>>>> 0ffcb29fddf309701a86ee2bd12e338735c2099f
             
             // Check for errors
             checkForErrors();
